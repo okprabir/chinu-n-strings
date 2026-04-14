@@ -1,0 +1,265 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Learn and Play Your Strings | Login</title>
+    <meta name="description" content="Secure access portal for Learn and Play Your Strings educational platform. Login as Admin or Student.">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&display=swap" rel="stylesheet">
+    
+    <!-- Firebase SDK for Google OTP (Phone Auth) -->
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-auth-compat.js"></script>
+</head>
+<body>
+    <div class="background-blobs">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+        <div class="blob blob-3"></div>
+    </div>
+
+    <!-- Cinematic Glass & Music Elements -->
+    <div class="cinematic-elements">
+        <!-- Abstract Guitar Strings -->
+        <svg class="cinematic-strings" viewBox="0 0 1000 500" fill="none" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+                <linearGradient id="stringGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                    <stop offset="0%" stop-color="#a855f7" stop-opacity="0" />
+                    <stop offset="50%" stop-color="#6366f1" stop-opacity="0.3" />
+                    <stop offset="100%" stop-color="#a855f7" stop-opacity="0" />
+                </linearGradient>
+            </defs>
+            <path class="s-line s-1" d="M -100 250 Q 250 50 500 250 T 1100 250" stroke="url(#stringGrad)" stroke-width="1.5"/>
+            <path class="s-line s-2" d="M -100 265 Q 250 100 500 265 T 1100 265" stroke="url(#stringGrad)" stroke-width="1.5"/>
+            <path class="s-line s-3" d="M -100 280 Q 250 150 500 280 T 1100 280" stroke="url(#stringGrad)" stroke-width="1.5"/>
+            <path class="s-line s-4" d="M -100 295 Q 250 200 500 295 T 1100 295" stroke="url(#stringGrad)" stroke-width="1.5"/>
+        </svg>
+
+        <!-- Morphed Glass Guitar -->
+        <div class="glass-instrument guitar-obj">
+            <svg viewBox="0 0 100 300" fill="none" class="cinematic-svg" stroke="currentColor" xmlns="http://www.w3.org/2000/svg">
+                <path d="M40 20 C40 10 60 10 60 20 L60 80 C75 100 85 130 80 180 C75 240 65 270 50 270 C35 270 25 240 20 180 C15 130 25 100 40 80 Z" stroke-width="2" stroke-linecap="round"/>
+                <circle cx="50" cy="140" r="16" stroke-width="2"/>
+                <line x1="48" y1="20" x2="48" y2="140" stroke-width="1" opacity="0.5"/>
+                <line x1="52" y1="20" x2="52" y2="140" stroke-width="1" opacity="0.5"/>
+            </svg>
+        </div>
+
+        <!-- Morphed Glass Ukulele -->
+        <div class="glass-instrument uke-obj">
+            <svg viewBox="0 0 80 220" fill="none" class="cinematic-svg" stroke="currentColor" xmlns="http://www.w3.org/2000/svg">
+                <path d="M35 15 C35 10 45 10 45 15 L45 60 C55 70 65 90 60 130 C55 170 50 190 40 190 C30 190 25 170 20 130 C15 90 25 70 35 60 Z" stroke-width="2" stroke-linecap="round"/>
+                <circle cx="40" cy="95" r="10" stroke-width="2"/>
+                <line x1="39" y1="15" x2="39" y2="95" stroke-width="1" opacity="0.5"/>
+                <line x1="41" y1="15" x2="41" y2="95" stroke-width="1" opacity="0.5"/>
+            </svg>
+        </div>
+        
+        <!-- Music Pattern Notes -->
+        <div class="glass-instrument note-1">
+            <svg viewBox="0 0 50 50" fill="none" class="cinematic-svg" stroke="currentColor" xmlns="http://www.w3.org/2000/svg">
+                <path d="M15 15 L35 10 L35 35 M32 37 C32 40 28 42 25 40 C22 38 23 35 26 34 C29 33 32 35 32 37 Z" stroke-width="2" stroke-linejoin="round"/>
+                <path d="M15 15 L15 40 M12 42 C12 45 8 47 5 45 C2 43 3 40 6 39 C9 38 12 40 12 42 Z" stroke-width="2" stroke-linejoin="round"/>
+            </svg>
+        </div>
+        
+        <div class="glass-instrument note-2">
+            <svg viewBox="0 0 50 50" fill="none" class="cinematic-svg" stroke="currentColor" xmlns="http://www.w3.org/2000/svg">
+                <path d="M25 10 C25 20 35 30 35 25 C35 15 25 10 25 10 Z" stroke-width="2" stroke-linejoin="round"/>
+                <path d="M25 10 L25 40 M22 42 C22 45 18 47 15 45 C12 43 13 40 16 39 C19 38 22 40 22 42 Z" stroke-width="2" stroke-linejoin="round"/>
+            </svg>
+        </div>
+    </div>
+
+    <div class="app-container">
+        <!-- Selection View -->
+        <section id="selection-view" class="view active">
+            <header class="hero-header">
+                <div class="brand-image-container">
+                    <img src="assets/instructor_profile.png?v=3" alt="Instructor" class="brand-img" style="display: block; width: 100%; height: 100%;">
+                </div>
+                <h1>
+                    <span class="sub-header">Learn</span>
+                    <span class="gradient-text main-title">Play Your Strings</span>
+                </h1>
+                <p>Please select your portal to continue</p>
+            </header>
+
+            <div class="selection-cards">
+                <button class="card" onclick="showLogin('admin')">
+                    <div class="card-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <path d="M12 15V17M12 7V13M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </div>
+                    <h2>Administrator</h2>
+                    <p>Manage courses, students, and system settings.</p>
+                </button>
+
+                <button class="card" onclick="showLogin('student')">
+                    <div class="card-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <path d="M12 14L20 9L12 4L4 9L12 14ZM12 14V20M12 14L20 9M12 14L4 9M6 10.25V15.5C6 15.5 8.5 18 12 18C15.5 18 18 15.5 18 15.5V10.25" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </div>
+                    <h2>Student</h2>
+                    <p>Access your dashboard, courses, and grades.</p>
+                </button>
+            </div>
+        </section>
+
+        <!-- Login View -->
+        <section id="login-view" class="view">
+            <div class="back-nav">
+                <button onclick="showSelection()" class="back-btn">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M19 12H5M5 12L12 19M5 12L12 5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    Back
+                </button>
+            </div>
+
+            <div class="login-card">
+                <!-- User Type Toggle (Only for Students) -->
+                <div id="student-toggle" class="form-toggle-group">
+                    <button onclick="toggleStudentForm('signin')" id="btn-signin" class="toggle-btn active">Sign In</button>
+                    <button onclick="toggleStudentForm('signup')" id="btn-signup" class="toggle-btn">Sign Up</button>
+                </div>
+
+                <div class="login-header">
+                    <h2 id="login-title">Admin Login</h2>
+                    <p id="login-subtitle">Enter your credentials to access the dashboard</p>
+                </div>
+
+                <!-- Sign In Form -->
+                <form id="login-form" onsubmit="handleLogin(event)">
+                    <div class="input-group" id="username-group">
+                        <label for="username" id="username-label">WhatsApp Number</label>
+                        <input type="text" id="username" placeholder="e.g. +1 234 567 890" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="password">Password</label>
+                        <input type="password" id="password" placeholder="â€¢â€¢â€¢â€¢â€¢â€¢â€¢â€¢" required>
+                    </div>
+                    <button type="submit" class="submit-btn" id="submit-btn">Continue</button>
+                </form>
+
+                <!-- Sign Up Form (Initially Hidden) -->
+                <form id="signup-form" style="display: none;" onsubmit="handleSignUp(event)">
+                    <div class="input-grid">
+                        <div class="input-group">
+                            <label for="reg-name">Full Name</label>
+                            <input type="text" id="reg-name" placeholder="John Doe" required>
+                        </div>
+                        <div class="input-group">
+                            <label for="reg-dob">Date of Birth</label>
+                            <input type="date" id="reg-dob" required>
+                        </div>
+                        <div class="input-group">
+                            <label for="reg-email">Email Address</label>
+                            <input type="email" id="reg-email" placeholder="john@example.com" required>
+                        </div>
+                        <div class="input-group">
+                            <label for="reg-gender">Gender</label>
+                            <select id="reg-gender" class="custom-select" required>
+                                <option value="" disabled selected>Select</option>
+                                <option value="male">Male</option>
+                                <option value="female">Female</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        <div class="input-group">
+                            <label for="reg-country">Country</label>
+                            <input type="text" id="reg-country" placeholder="USA" required>
+                        </div>
+                    </div>
+                    <div class="input-group">
+                        <label for="reg-whatsapp">WhatsApp Number</label>
+                        <input type="tel" id="reg-whatsapp" placeholder="9876543210" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="reg-pass">Create Password</label>
+                        <input type="password" id="reg-pass" placeholder="â€¢â€¢â€¢â€¢â€¢â€¢â€¢â€¢" required>
+                    </div>
+                    <button type="submit" class="submit-btn" id="signup-btn">Create Account</button>
+                    <div style="text-align: center; margin-top: 1rem;">
+                        <a href="#" onclick="toggleStudentForm('signin')" style="color: var(--accent-primary); text-decoration: none; font-size: 0.9rem;">Back to Sign In</a>
+                    </div>
+                </form>
+
+                <!-- OTP Verification (Simulated) -->
+                <div id="otp-view" style="display: none;">
+                    <div class="login-header">
+                        <h2>Verify WhatsApp</h2>
+                        <p>We've sent a 4-digit code to <span id="otp-target-number">you</span></p>
+                    </div>
+                    <form id="otp-form" onsubmit="handleOTPVerify(event)">
+                        <div class="otp-input-group">
+                            <input type="text" maxlength="1" class="otp-dot" required>
+                            <input type="text" maxlength="1" class="otp-dot" required>
+                            <input type="text" maxlength="1" class="otp-dot" required>
+                            <input type="text" maxlength="1" class="otp-dot" required>
+                        </div>
+                        <button type="submit" class="submit-btn">Verify & enroll</button>
+                        <p class="resend-text">Didn't receive code? <a href="#" onclick="resendOTP()">Resend</a></p>
+                    </form>
+                </div>
+
+                <!-- Forgot Password View -->
+                <div id="forgot-pass-view" style="display: none;">
+                    <div class="login-header">
+                        <h2>Recover Account</h2>
+                        <p>Verify your details to reset password</p>
+                    </div>
+                    <form id="forgot-form" onsubmit="handleResetRequest(event)">
+                        <div class="input-group">
+                            <label>WhatsApp Number</label>
+                            <input type="tel" id="reset-whatsapp" placeholder="9876543210" required>
+                        </div>
+                        <div class="input-group">
+                            <label>Date of Birth</label>
+                            <input type="date" id="reset-dob" required>
+                        </div>
+                        <div class="input-group">
+                            <label>Country</label>
+                            <input type="text" id="reset-country" placeholder="USA" required>
+                        </div>
+                        <button type="submit" class="submit-btn" id="reset-btn">Verify Identity</button>
+                        <div style="text-align: center; margin-top: 1rem;">
+                            <a href="#" onclick="toggleStudentForm('signin')" style="color: var(--accent-primary); text-decoration: none; font-size: 0.9rem;">Back to Sign In</a>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Reset New Password View -->
+                <div id="new-pass-view" style="display: none;">
+                    <div class="login-header">
+                        <h2>New Password</h2>
+                        <p>Enter your new secure password</p>
+                    </div>
+                    <form id="new-pass-form" onsubmit="handleFinalReset(event)">
+                        <div class="input-group">
+                            <label>New Password</label>
+                            <input type="password" id="final-new-pass" placeholder="â€¢â€¢â€¢â€¢â€¢â€¢â€¢â€¢" required>
+                        </div>
+                        <button type="submit" class="submit-btn">Update Password</button>
+                    </form>
+                </div>
+
+                <div class="login-footer" id="login-footer">
+                    <a href="#" onclick="showForgotPassword()">Forgot password?</a>
+                </div>
+                <!-- Required for Google Phone Auth -->
+                <div id="recaptcha-container"></div>
+            </div>
+        </section>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
+
+
